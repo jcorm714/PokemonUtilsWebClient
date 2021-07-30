@@ -47,8 +47,9 @@ function validate(){
         })
 
         let sum = 0
-        for(let node in evs){
-                sum += node.value
+        for(let i = 0; i<evs.length; i++){
+                let node = evs[i];
+                sum += parseInt(node.value)
         }
 
         if(sum > 510){
