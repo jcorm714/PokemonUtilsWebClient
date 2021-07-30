@@ -135,7 +135,7 @@ function submit()
                 let stat = element.getAttribute("aria-label")
                 let mapped_name = map_stat_name(stat)
                 let value = element.value
-                stat_values[mapped_name] = value
+                stat_values[mapped_name] = parseInt(value)
                
         }
 
@@ -146,24 +146,24 @@ function submit()
                 let stat = element.getAttribute("aria-label")
                 let mapped_name = map_stat_name(stat)
                 let value = element.value
-                evs[mapped_name] = value
+                evs[mapped_name] = parseInt(value)
                
         }
         
 
         let obj = {name: name,
                    nature: nature,
-                   level: level,
+                   level: parseInt(level),
                    stat_values: stat_values,
                    evs: evs}
         
         
 
         const reqURL = "https://jwc-pokemon-utils.herokuapp.com/calcIV"
+        //const reqURL = "http://127.0.0.1:5000/calcIV"
         postData(reqURL, obj)
-        .then(response => response.json())
         .then(data => success(data))
-        .error(error => console.log(error))
+        
 
 
 }
@@ -173,15 +173,16 @@ function success(data){
         let success = document.querySelector("#success")
         let iv_list = document.querySelector("#iv-list")
         
-        while(iv_list){
+        while(iv_list.firstChild){
                 iv_list.removeChild(iv_list.firstChild)
         }
-        for(let [key, value] in Object.entries(data)){
-                let li = Document.createElement("li")
-                let text = `${unmap_stat_name(key)}: ${value}`
+        for(let key in data){
+                let li = document.createElement("li")
+                let text = `${unmap_stat_name(key)}: ${data[key]}`
                 li.appendChild(document.createTextNode(text))
                 iv_list.appendChild(li)
         }
+        success.classList.remove("invisible")
 }
 
 
