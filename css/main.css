@@ -6,22 +6,23 @@ p {
     color: #ccc;
 }
 
-h2, span {
+h2,
+span {
     color: azure;
 }
 
 
-.invisible{
+.invisible {
     display: none;
 }
 
 .form-input {
     background-color: #888;
     color: black;
-    
+
 }
 
-.form-input::placeholder{
+.form-input::placeholder {
     color: black;
-    opacity:  1;
+    opacity: 1;
 }
